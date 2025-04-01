@@ -37,10 +37,18 @@
         #productTypeBox {
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
+            background-color: var(--bs-success-bg-subtle) !important;
+            color: var(--bs-success) !important;
+            border: 1px solid var(--bs-success) !important;
+            font-weight: bold;
         }
         
         #productTypeBox.show {
             opacity: 1;
+        }
+        
+        #productTypeBox i {
+            color: var(--bs-success);
         }
         
         .authentic {
@@ -163,9 +171,9 @@
             // Product types based on last digit
             const productTypes = {
                 '0': 'Regular Cannabis Flower',
-                '1': 'Premium Cannabis Flower',
-                '2': 'Cannabis Concentrate',
-                '3': 'Vape Cartridge',
+                '1': '1 gram disposable cartridge',
+                '2': '2 gram disposable cartridge',
+                '3': 'Concentrate/Dabs',
                 '4': 'Edible Product',
                 '5': 'Topical Product',
                 '6': 'Tincture',
@@ -211,8 +219,7 @@
                         const productType = productTypes[lastDigit] || 'Unknown Product Type';
                         
                         // Show product type
-                        productTypeBox.innerHTML = `<i class="fas fa-check-circle me-2"></i>${productType}`;
-                        productTypeBox.classList.add('authentic');
+                        productTypeBox.innerHTML = `<i class="fas fa-check-circle me-2"></i>Product Type: <strong>${productType}</strong>`;
                         productTypeBox.classList.remove('hidden');
                         productTypeBox.classList.add('show');
                     }
