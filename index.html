@@ -79,9 +79,9 @@
                 <h2 class="text-center mb-4">Product Verification</h2>
                 
                 <div class="mb-3">
-                    <label for="verificationCode" class="form-label">Enter Verification Code</label>
+                    <label for="verificationCode" class="form-label">Enter Verification Code (12 digits max)</label>
                     <input type="text" class="form-control" id="verificationCode" 
-                           placeholder="Enter your product verification code">
+                           placeholder="Enter your product verification code" maxlength="12">
                     <div class="invalid-feedback">
                         Please enter a verification code.
                     </div>
@@ -163,10 +163,15 @@
                 }
             });
             
-            // Remove invalid state when user starts typing
+            // Remove invalid state when user starts typing and enforce max length
             verificationCodeInput.addEventListener('input', function() {
                 if (this.value.trim() !== '') {
                     this.classList.remove('is-invalid');
+                }
+                
+                // Ensure the input doesn't exceed 12 characters
+                if (this.value.length > 12) {
+                    this.value = this.value.slice(0, 12);
                 }
             });
         });
