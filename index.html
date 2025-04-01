@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Verification Tool</title>
+    <!-- Bootstrap CSS from Replit theme -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .verification-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .verification-box {
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-box {
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .authentic {
+            background-color: var(--bs-success-bg-subtle);
+            color: var(--bs-success);
+            border: 1px solid var(--bs-success);
+        }
+        
+        .fake {
+            background-color: var(--bs-danger-bg-subtle);
+            color: var(--bs-danger);
+            border: 1px solid var(--bs-danger);
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="verification-container">
+            <div class="verification-box bg-dark">
+                <h2 class="text-center mb-4">Product Verification</h2>
+                
+                <div class="mb-3">
+                    <label for="verificationCode" class="form-label">Enter Verification Code</label>
+                    <input type="text" class="form-control" id="verificationCode" 
+                           placeholder="Enter your product verification code">
+                    <div class="invalid-feedback">
+                        Please enter a verification code.
+                    </div>
+                </div>
+                
+                <div class="d-grid">
+                    <button class="btn btn-secondary" id="verifyButton">
+                        <i class="fas fa-shield-alt me-2"></i>Verify Product
+                    </button>
+                </div>
+                
+                <div id="authenticResult" class="result-box authentic hidden">
+                    <i class="fas fa-check-circle me-2"></i> Authentic Product
+                </div>
+                
+                <div id="fakeResult" class="result-box fake hidden">
+                    <i class="fas fa-times-circle me-2"></i> Fake Product
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 text-muted">
+                <small>
+                    <i class="fas fa-info-circle me-1"></i>
+                    Enter your product verification code to check authenticity.
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const verificationCodeInput = document.getElementById('verificationCode');
+            const verifyButton = document.getElementById('verifyButton');
+            const authenticResult = document.getElementById('authenticResult');
+            const fakeResult = document.getElementById('fakeResult');
+            
+            // Function to verify the product code
+            function verifyCode() {
+                // Get the entered code
+                const code = verificationCodeInput.value.trim();
+                
+                // Validate that the code is not empty
+                if (code === '') {
+                    verificationCodeInput.classList.add('is-invalid');
+                    return;
+                }
+                
+                // Remove any previous validation states
+                verificationCodeInput.classList.remove('is-invalid');
+                
+                // Hide both result boxes first
+                authenticResult.classList.add('hidden');
+                fakeResult.classList.add('hidden');
+                
+                // Check if the code starts with "08552"
+                if (code.startsWith('08552')) {
+                    // Show the authentic result
+                    authenticResult.classList.remove('hidden');
+                } else {
+                    // Show the fake result
+                    fakeResult.classList.remove('hidden');
+                    // Add shake animation
+                    fakeResult.classList.add('shake');
+                    
+                    // Remove the shake class after the animation completes
+                    setTimeout(() => {
+                        fakeResult.classList.remove('shake');
+                    }, 500);
+                }
+            }
+            
+            // Event listener for verify button click
+            verifyButton.addEventListener('click', verifyCode);
+            
+            // Event listener for Enter key press in the input field
+            verificationCodeInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    verifyCode();
+                }
+            });
+            
+            // Remove invalid state when user starts typing
+            verificationCodeInput.addEventListener('input', function() {
+                if (this.value.trim() !== '') {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
