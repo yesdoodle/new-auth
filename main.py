@@ -24,9 +24,21 @@ def verify_code():
     # Determine if the code is authentic (starts with 08552)
     is_authentic = code.startswith('08552')
     
+    # Determine product type based on the last digit
+    product_type = None
+    if is_authentic and len(code) > 0:
+        last_digit = code[-1]
+        if last_digit == '1':
+            product_type = "1 gram disposable cartridge"
+        elif last_digit == '2':
+            product_type = "2 gram disposable cartridge"
+        elif last_digit == '3':
+            product_type = "Concentrate/Dabs"
+    
     return jsonify({
         'authentic': is_authentic,
-        'count': code_verification_count[code]
+        'count': code_verification_count[code],
+        'product_type': product_type
     })
 
 if __name__ == "__main__":
