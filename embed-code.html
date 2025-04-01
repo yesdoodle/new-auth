@@ -1,0 +1,332 @@
+<!-- Product Verification Widget Embed Code -->
+<!-- Copy and paste this code into your website to embed the verification widget -->
+
+<div id="product-verification-widget" style="max-width: 500px; margin: 0 auto;">
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        /* Widget container */
+        .verification-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+        
+        .verification-box {
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        /* Result boxes */
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Product type box styling */
+        #productTypeBox {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        #productTypeBox.show {
+            opacity: 1;
+        }
+        
+        .authentic {
+            background-color: var(--bs-success-bg-subtle);
+            color: var(--bs-success);
+            border: 1px solid var(--bs-success);
+        }
+        
+        .fake {
+            background-color: var(--bs-danger-bg-subtle);
+            color: var(--bs-danger);
+            border: 1px solid var(--bs-danger);
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        .pulse {
+            animation: pulse 1.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(72, 199, 116, 0.7);
+            }
+            
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(72, 199, 116, 0);
+            }
+            
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(72, 199, 116, 0);
+            }
+        }
+    </style>
+    
+    <div class="verification-container">
+        <div class="verification-box bg-dark">
+            <h2 class="text-center mb-4">Product Verification</h2>
+            
+            <div class="mb-3">
+                <label for="verificationCode" class="form-label">Enter Verification Code (12 digits max)</label>
+                <input type="text" class="form-control" id="verificationCode" 
+                       placeholder="Enter your product verification code" maxlength="12">
+                <div class="invalid-feedback">
+                    Please enter a verification code.
+                </div>
+            </div>
+            
+            <div class="d-grid">
+                <button class="btn btn-secondary" id="verifyButton">
+                    <i class="fas fa-shield-alt me-2"></i>Verify Product
+                </button>
+            </div>
+            
+            <!-- Verification Counter -->
+            <div id="codeCounter" class="text-center mt-3 d-none">
+                <small class="text-success">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This code has been verified <span id="verificationCount">0</span> times
+                </small>
+            </div>
+            
+            <div id="authenticResult" class="result-box authentic hidden">
+                <i class="fas fa-check-circle me-2"></i> Authentic Product
+            </div>
+            
+            <!-- Product Type Display -->
+            <div id="productTypeBox" class="mt-3 text-center hidden">
+                <div class="card border-success">
+                    <div class="card-body py-2">
+                        <p class="mb-0 text-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Product Type: <span id="productTypeText">Unknown</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="fakeResult" class="result-box fake hidden">
+                <i class="fas fa-times-circle me-2"></i> Fake Product
+            </div>
+        </div>
+        
+        <div class="text-center mt-4 text-muted">
+            <small>
+                <i class="fas fa-info-circle me-1"></i>
+                Enter your product verification code to check authenticity.
+            </small>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update this URL to point to your API server
+            const API_BASE_URL = 'https://your-api-server.com';
+            
+            const verificationCodeInput = document.getElementById('verificationCode');
+            const verifyButton = document.getElementById('verifyButton');
+            const authenticResult = document.getElementById('authenticResult');
+            const fakeResult = document.getElementById('fakeResult');
+            const codeCounter = document.getElementById('codeCounter');
+            const verificationCount = document.getElementById('verificationCount');
+            const productTypeBox = document.getElementById('productTypeBox');
+            const productTypeText = document.getElementById('productTypeText');
+            
+            // Function to verify the product code
+            async function verifyCode() {
+                // Get the entered code
+                const code = verificationCodeInput.value.trim();
+                
+                // Validate that the code is not empty
+                if (code === '') {
+                    verificationCodeInput.classList.add('is-invalid');
+                    return;
+                }
+                
+                // Remove any previous validation states
+                verificationCodeInput.classList.remove('is-invalid');
+                
+                // Hide all result boxes first
+                authenticResult.classList.add('hidden');
+                fakeResult.classList.add('hidden');
+                codeCounter.classList.add('d-none');
+                productTypeBox.classList.add('hidden');
+                
+                try {
+                    // For client-side only verification (no API)
+                    // This allows the widget to still function if the API is not available
+                    // Determines if the code starts with "08552" (authentic)
+                    const isAuthentic = code.startsWith('08552');
+                    
+                    // Determine product type based on the last digit
+                    let productType = null;
+                    if (isAuthentic && code.length > 0) {
+                        const lastDigit = code.slice(-1);
+                        if (lastDigit === '1') {
+                            productType = "1 gram disposable cartridge";
+                        } else if (lastDigit === '2') {
+                            productType = "2 gram disposable cartridge";
+                        } else if (lastDigit === '3') {
+                            productType = "Concentrate/Dabs";
+                        }
+                    }
+                    
+                    // Try to use the API if available
+                    let useApi = true;
+                    let data = {
+                        authentic: isAuthentic,
+                        count: 1,
+                        product_type: productType
+                    };
+                    
+                    try {
+                        const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ code: code })
+                        });
+                        
+                        if (response.ok) {
+                            data = await response.json();
+                        } else {
+                            useApi = false;
+                        }
+                    } catch (apiError) {
+                        console.log('API not available, using client-side verification');
+                        useApi = false;
+                    }
+                    
+                    // Update the verification counter
+                    verificationCount.textContent = data.count;
+                    codeCounter.classList.remove('d-none');
+                    
+                    // Display result based on authenticity
+                    if (data.authentic) {
+                        // Show the authentic result
+                        authenticResult.classList.remove('hidden');
+                        // Add pulse animation
+                        authenticResult.classList.add('pulse');
+                        
+                        // Show product type information if available
+                        if (data.product_type) {
+                            productTypeText.textContent = data.product_type;
+                            productTypeBox.classList.remove('hidden');
+                            
+                            // Add a slight delay before showing the product type box for a nice effect
+                            setTimeout(() => {
+                                productTypeBox.classList.add('show');
+                            }, 300);
+                        }
+                        
+                        // Remove the pulse class after the animation completes
+                        setTimeout(() => {
+                            authenticResult.classList.remove('pulse');
+                        }, 1500);
+                    } else {
+                        // Show the fake result
+                        fakeResult.classList.remove('hidden');
+                        // Add shake animation
+                        fakeResult.classList.add('shake');
+                        
+                        // Remove the shake class after the animation completes
+                        setTimeout(() => {
+                            fakeResult.classList.remove('shake');
+                        }, 500);
+                    }
+                    
+                    // Change counter text color based on verification count
+                    const counterLabel = codeCounter.querySelector('small');
+                    
+                    // Remove all possible classes first
+                    counterLabel.classList.remove('text-success', 'text-warning', 'text-danger');
+                    
+                    // Apply appropriate color based on count
+                    if (data.count <= 2) {
+                        // Green for 1-2 verifications
+                        counterLabel.classList.add('text-success');
+                        counterLabel.innerHTML = '<i class="fas fa-info-circle me-1"></i>This code has been verified <span id="verificationCount">' + data.count + '</span> times';
+                    } else if (data.count === 3) {
+                        // Yellow for 3 verifications
+                        counterLabel.classList.add('text-warning');
+                        counterLabel.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>This code has been verified <span id="verificationCount">' + data.count + '</span> times';
+                    } else {
+                        // Red for 4+ verifications
+                        counterLabel.classList.add('text-danger');
+                        counterLabel.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>This code has been verified <span id="verificationCount">' + data.count + '</span> times';
+                    }
+                    
+                } catch (error) {
+                    console.error('Error verifying code:', error);
+                    alert('An error occurred while verifying your code. Please try again.');
+                }
+            }
+            
+            // Event listener for verify button click
+            verifyButton.addEventListener('click', verifyCode);
+            
+            // Event listener for Enter key press in the input field
+            verificationCodeInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    verifyCode();
+                }
+            });
+            
+            // Reset display elements when input changes
+            verificationCodeInput.addEventListener('input', function() {
+                // Hide result elements when user starts typing a new code
+                codeCounter.classList.add('d-none');
+                productTypeBox.classList.remove('show');
+                productTypeBox.classList.add('hidden');
+                
+                if (this.value.trim() !== '') {
+                    this.classList.remove('is-invalid');
+                }
+                
+                // Ensure the input doesn't exceed 12 characters
+                if (this.value.length > 12) {
+                    this.value = this.value.slice(0, 12);
+                }
+            });
+        });
+    </script>
+</div>
+<!-- End Product Verification Widget Embed Code -->

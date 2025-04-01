@@ -5,6 +5,14 @@ app = Flask(__name__)
 # Dictionary to track how many times each code has been verified
 code_verification_count = {}
 
+# Route to reset the verification counter
+@app.route('/api/reset-counter', methods=['POST'])
+def reset_counter():
+    """Reset the verification counter for all codes"""
+    global code_verification_count
+    code_verification_count = {}
+    return jsonify({'success': True, 'message': 'Counter reset successfully'})
+
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
