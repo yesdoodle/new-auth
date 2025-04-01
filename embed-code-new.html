@@ -1,0 +1,296 @@
+<!-- Product Verification Widget Embed Code -->
+<!-- Copy and paste this code into your website to embed the verification widget -->
+
+<div id="product-verification-widget" style="max-width: 500px; margin: 0 auto;">
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        /* Widget container */
+        .verification-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+        
+        .verification-box {
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        /* Result boxes */
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Product type box styling */
+        #productTypeBox {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        #productTypeBox.show {
+            opacity: 1;
+        }
+        
+        .authentic {
+            background-color: var(--bs-success-bg-subtle);
+            color: var(--bs-success);
+            border: 1px solid var(--bs-success);
+        }
+        
+        .fake {
+            background-color: var(--bs-danger-bg-subtle);
+            color: var(--bs-danger);
+            border: 1px solid var(--bs-danger);
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        .pulse {
+            animation: pulse 1.5s ease-in-out;
+        }
+        
+        /* Logo animation styles */
+        .logo-animation {
+            animation: fadeInRotateScale 1.5s ease-in-out;
+            transform-origin: center;
+        }
+        
+        @keyframes fadeInRotateScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.2) rotate(-45deg);
+            }
+            
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1) rotate(15deg);
+            }
+            
+            75% {
+                transform: scale(0.9) rotate(-5deg);
+            }
+            
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(72, 199, 116, 0.7);
+            }
+            
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(72, 199, 116, 0);
+            }
+            
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(72, 199, 116, 0);
+            }
+        }
+    </style>
+    
+    <div class="verification-container">
+        <div class="verification-box bg-dark">
+            <!-- Logo with animation -->
+            <div class="text-center mb-4">
+                <!-- Using PNG image with animation (embedded as base64) -->
+                <img src="data:image/png;base64,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" alt="No Distribution Logo" class="logo-animation" height="120">
+            </div>
+            
+            <h4 class="text-center mb-4">Product Verification</h4>
+            
+            <div class="mb-3">
+                <label for="productCode" class="form-label">Enter Product Code (12 Characters Max)</label>
+                <input type="text" class="form-control" id="productCode" maxlength="12" placeholder="Enter your product code">
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button id="verifyButton" class="btn btn-primary">Verify Product</button>
+            </div>
+            
+            <div id="resultBox" class="result-box hidden"></div>
+            <div id="productTypeBox" class="result-box hidden mt-3"></div>
+            <div id="verificationCount" class="mt-3 text-center"></div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const productCodeInput = document.getElementById('productCode');
+            const verifyButton = document.getElementById('verifyButton');
+            const resultBox = document.getElementById('resultBox');
+            const productTypeBox = document.getElementById('productTypeBox');
+            const verificationCount = document.getElementById('verificationCount');
+            
+            // Product types based on last digit
+            const productTypes = {
+                '0': 'Regular Cannabis Flower',
+                '1': 'Premium Cannabis Flower',
+                '2': 'Cannabis Concentrate',
+                '3': 'Vape Cartridge',
+                '4': 'Edible Product',
+                '5': 'Topical Product',
+                '6': 'Tincture',
+                '7': 'Pre-Roll',
+                '8': 'CBD Product',
+                '9': 'Accessory'
+            };
+            
+            // Verification Button Click Handler
+            verifyButton.addEventListener('click', function() {
+                verifyProduct();
+            });
+            
+            // Enter Key Handler
+            productCodeInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyProduct();
+                }
+            });
+            
+            function verifyProduct() {
+                const productCode = productCodeInput.value.trim();
+                
+                if (productCode === '') {
+                    showResult('Please enter a product code', 'fake');
+                    return;
+                }
+                
+                // Check if product code starts with 08552 (authentic)
+                const isAuthentic = productCode.startsWith('08552');
+                
+                // Reset previous results
+                resultBox.className = 'result-box';
+                productTypeBox.className = 'result-box hidden';
+                
+                if (isAuthentic) {
+                    showResult('Authentic Product: This product is genuine!', 'authentic');
+                    resultBox.classList.add('pulse');
+                    
+                    // Get product type based on last digit
+                    if (productCode.length > 0) {
+                        const lastDigit = productCode[productCode.length - 1];
+                        const productType = productTypes[lastDigit] || 'Unknown Product Type';
+                        
+                        // Show product type
+                        productTypeBox.innerHTML = `<i class="fas fa-check-circle me-2"></i>${productType}`;
+                        productTypeBox.classList.add('authentic');
+                        productTypeBox.classList.remove('hidden');
+                        productTypeBox.classList.add('show');
+                    }
+                    
+                    // Track verification with API call
+                    fetch('/api/verify', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            code: productCode
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update verification count
+                        updateVerificationCount(data.count);
+                    })
+                    .catch(error => {
+                        console.error('Error tracking verification:', error);
+                        // Use simulation as a fallback when API fails
+                        const simData = simulateVerification(productCode);
+                        updateVerificationCount(simData.count);
+                    });
+                    
+                } else {
+                    showResult('Fake Product: This product appears to be counterfeit!', 'fake');
+                    resultBox.classList.add('shake');
+                    
+                    // Hide product type box
+                    productTypeBox.classList.remove('show');
+                    setTimeout(() => {
+                        productTypeBox.classList.add('hidden');
+                    }, 300);
+                }
+            }
+            
+            function showResult(message, className) {
+                resultBox.textContent = message;
+                resultBox.className = 'result-box ' + className;
+                resultBox.classList.remove('hidden');
+            }
+            
+            function updateVerificationCount(count) {
+                const counterLabel = document.createElement('div');
+                
+                if (count <= 2) {
+                    // Green for 1-2 verifications
+                    counterLabel.classList.add('text-success');
+                    counterLabel.innerHTML = '<i class="fas fa-info-circle me-1"></i>This code has been verified ' + count + ' time(s).';
+                } else if (count === 3) {
+                    // Yellow for 3 verifications
+                    counterLabel.classList.add('text-warning');
+                    counterLabel.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>This code has been verified ' + count + ' times. Be cautious.';
+                } else {
+                    // Red for 4+ verifications
+                    counterLabel.classList.add('text-danger');
+                    counterLabel.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>Warning! This code has been verified ' + count + ' times. May be suspicious.';
+                }
+                
+                verificationCount.innerHTML = '';
+                verificationCount.appendChild(counterLabel);
+            }
+            
+            // Simulate a verification count for demo purposes
+            // In a real implementation, this would be returned from the API
+            function simulateVerification(code) {
+                // Simple hash to generate consistent counts for demo
+                let count = 1;
+                if (code && code.length > 0) {
+                    count = (code.charCodeAt(0) % 5) + 1;
+                }
+                
+                return {
+                    count: count
+                };
+            }
+        });
+    </script>
+</div>
