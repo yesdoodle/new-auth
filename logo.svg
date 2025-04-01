@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g transform="translate(20, 10)" fill="#000000" fill-rule="nonzero">
-            <!-- Triangle -->
-            <path d="M80,0 L160,138.5 L0,138.5 Z" stroke="#000000" stroke-width="8"></path>
-            
-            <!-- Exclamation mark -->
-            <circle cx="130" cy="115" r="8"></circle>
-            <rect x="122" y="75" width="16" height="30" rx="4"></rect>
-            
-            <!-- Cannabis leaf -->
-            <path d="M55,115 C55,115 30,95 30,70 C30,60 35,50 45,50 C50,50 55,55 55,65 L55,115 Z"></path>
-            <path d="M55,115 C55,115 80,95 80,70 C80,60 75,50 65,50 C60,50 55,55 55,65 L55,115 Z"></path>
-            <path d="M55,115 C55,115 45,90 25,80 C15,75 5,80 5,90 C5,95 15,100 25,95 L55,115 Z"></path>
-            <path d="M55,115 C55,115 65,90 85,80 C95,75 105,80 105,90 C105,95 95,100 85,95 L55,115 Z"></path>
-            <path d="M55,115 C55,115 55,85 55,60 C55,50 60,40 70,40 C75,40 80,45 75,55 L55,115 Z"></path>
-            
-            <!-- NO DISTRIBUTION text -->
-            <path d="M15,155 C15,155 15,150 25,150 C30,150 35,155 30,160 C30,160 35,165 30,165 C20,165 15,160 15,155 Z" stroke="#000000" stroke-width="1"></path>
-            <path d="M40,150 C40,150 50,150 50,157.5 C50,165 40,165 40,165 L40,150 Z" stroke="#000000" stroke-width="1"></path>
-            
-            <path d="M60,150 C60,150 70,150 70,157.5 C70,165 60,165 60,165 L60,150 Z" stroke="#000000" stroke-width="1"></path>
-            <path d="M75,150 L80,165 L85,150 L75,150 Z" stroke="#000000" stroke-width="1"></path>
-            <path d="M90,150 C90,150 95,150 95,157.5 C95,165 90,165 90,165 L90,150 Z" stroke="#000000" stroke-width="1"></path>
-            <path d="M100,150 L100,165 M100,155 L105,155" stroke="#000000" stroke-width="2"></path>
-            <path d="M110,150 L110,165 M110,150 L115,150 M110,157.5 L115,157.5" stroke="#000000" stroke-width="2"></path>
-            <path d="M120,150 L120,165 M120,150 L125,150 M120,157.5 L125,157.5 M120,165 L125,165" stroke="#000000" stroke-width="2"></path>
-            <path d="M130,150 L140,165 M140,150 L130,165" stroke="#000000" stroke-width="2"></path>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Warning Triangle -->
+  <path d="M200,40 L360,320 L40,320 Z" fill="white" stroke="black" stroke-width="20"/>
+  
+  <!-- Cannabis Leaf -->
+  <g transform="translate(130, 140) scale(1.5)">
+    <!-- Main stem -->
+    <path d="M45,70 L45,40 C45,20 30,10 20,15 C10,20 20,35 30,40 L45,70 Z" fill="black"/>
+    
+    <!-- Left side leaves -->
+    <path d="M45,70 L25,50 C10,35 0,40 5,50 C10,60 25,65 45,70 Z" fill="black"/>
+    <path d="M45,70 L20,40 C5,30 0,40 10,50 C20,55 35,65 45,70 Z" fill="black"/>
+    
+    <!-- Right side leaves -->
+    <path d="M45,70 L65,50 C80,35 90,40 85,50 C80,60 65,65 45,70 Z" fill="black"/>
+    <path d="M45,70 L70,40 C85,30 90,40 80,50 C70,55 55,65 45,70 Z" fill="black"/>
+    
+    <!-- Top leaf -->
+    <path d="M45,70 L45,30 C45,15 60,10 65,20 C70,30 60,50 45,70 Z" fill="black"/>
+  </g>
+  
+  <!-- Exclamation mark -->
+  <g transform="translate(280, 160)">
+    <rect x="-10" y="0" width="20" height="80" rx="5" ry="5" fill="black"/>
+    <circle cx="0" cy="110" r="10" fill="black"/>
+  </g>
+  
+  <!-- NO DISTRIBUTION text -->
+  <text x="200" y="370" font-family="Impact, sans-serif" font-size="40" text-anchor="middle" fill="black" font-weight="bold" style="letter-spacing:2px;">NO DISTRIBUTION</text>
 </svg>
