@@ -118,8 +118,8 @@
                 
                 <!-- Verification Counter -->
                 <div id="codeCounter" class="text-center mt-3 d-none">
-                    <small class="text-warning">
-                        <i class="fas fa-exclamation-triangle me-1"></i>
+                    <small class="text-success">
+                        <i class="fas fa-info-circle me-1"></i>
                         This code has been verified <span id="verificationCount">0</span> times
                     </small>
                 </div>
@@ -213,13 +213,25 @@
                         }, 500);
                     }
                     
-                    // Change counter text color if verification count is high (potential duplicate)
-                    if (data.count > 3) {
-                        codeCounter.querySelector('small').classList.remove('text-warning');
-                        codeCounter.querySelector('small').classList.add('text-danger');
+                    // Change counter text color based on verification count
+                    const counterLabel = codeCounter.querySelector('small');
+                    
+                    // Remove all possible classes first
+                    counterLabel.classList.remove('text-success', 'text-warning', 'text-danger');
+                    
+                    // Apply appropriate color based on count
+                    if (data.count <= 2) {
+                        // Green for 1-2 verifications
+                        counterLabel.classList.add('text-success');
+                        counterLabel.innerHTML = '<i class="fas fa-info-circle me-1"></i>This code has been verified <span id="verificationCount">' + data.count + '</span> times';
+                    } else if (data.count === 3) {
+                        // Yellow for 3 verifications
+                        counterLabel.classList.add('text-warning');
+                        counterLabel.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>This code has been verified <span id="verificationCount">' + data.count + '</span> times';
                     } else {
-                        codeCounter.querySelector('small').classList.remove('text-danger');
-                        codeCounter.querySelector('small').classList.add('text-warning');
+                        // Red for 4+ verifications
+                        counterLabel.classList.add('text-danger');
+                        counterLabel.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>This code has been verified <span id="verificationCount">' + data.count + '</span> times';
                     }
                 } catch (error) {
                     console.error('Error verifying code:', error);
