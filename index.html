@@ -67,6 +67,33 @@
             animation: pulse 1.5s ease-in-out;
         }
         
+        /* Logo animation styles */
+        .logo-animation {
+            animation: fadeInRotateScale 1.5s ease-in-out;
+            transform-origin: center;
+        }
+        
+        @keyframes fadeInRotateScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.2) rotate(-45deg);
+            }
+            
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1) rotate(15deg);
+            }
+            
+            75% {
+                transform: scale(0.9) rotate(-5deg);
+            }
+            
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
         @keyframes shake {
             10%, 90% {
                 transform: translate3d(-1px, 0, 0);
@@ -111,8 +138,8 @@
             <div class="verification-box bg-dark">
                 <!-- Logo -->
                 <div class="text-center mb-4">
-                    <!-- Using PNG image for better quality -->
-                    <img src="img/logo.png" alt="Verification Logo" width="180" height="180" class="img-fluid">
+                    <!-- Using PNG image for better quality with animation -->
+                    <img src="img/logo.png" alt="Verification Logo" width="180" height="180" class="img-fluid logo-animation">
                 </div>
                 <h2 class="text-center mb-4">Product Verification</h2>
                 
