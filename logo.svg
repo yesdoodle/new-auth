@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180px" height="180px" viewBox="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle fill="#212529" cx="90" cy="90" r="90"></circle>
+        <g transform="translate(36.000000, 36.000000)">
+            <path d="M54,0 C83.8233,0 108,24.1767 108,54 C108,83.8233 83.8233,108 54,108 C24.1767,108 0,83.8233 0,54 C0,24.1767 24.1767,0 54,0 Z M54,12 C30.8042,12 12,30.8042 12,54 C12,77.1958 30.8042,96 54,96 C77.1958,96 96,77.1958 96,54 C96,30.8042 77.1958,12 54,12 Z" fill="#4CAF50" fill-rule="nonzero"></path>
+            <text font-family="Arial-BoldMT, Arial" font-size="22" font-weight="bold" fill="#4CAF50">
+                <tspan x="29" y="58">SAFE</tspan>
+            </text>
+            <path d="M54,30 L54,30 C56.7614,30 59,32.2386 59,35 L59,61 C59,63.7614 56.7614,66 54,66 L54,66 C51.2386,66 49,63.7614 49,61 L49,35 C49,32.2386 51.2386,30 54,30 Z" fill="#4CAF50"></path>
+            <circle fill="#4CAF50" cx="54" cy="75" r="5"></circle>
+        </g>
+    </g>
+</svg>
