@@ -101,9 +101,38 @@
     
     <div class="verification-container">
         <div class="verification-box bg-dark">
-            <!-- Logo (embedded as Data URI) -->
-            <div class="text-center mb-3">
-                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPCEtLSBXYXJuaW5nIFRyaWFuZ2xlIC0tPgogIDxwYXRoIGQ9Ik0yMDAsNDAgTDM2MCwzMjAgTDQwLDMyMCBaIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyMCIvPgogIAogIDwhLS0gQ2FubmFiaXMgTGVhZiAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzAsIDE0MCkgc2NhbGUoMS41KSI+CiAgICA8IS0tIE1haW4gc3RlbSAtLT4KICAgIDxwYXRoIGQ9Ik00NSw3MCBMNDUsNDAgQzQ1LDIwIDMwLDEwIDIwLDE1IEMxMCwyMCAyMCwzNSAzMCw0MCBMNDUsNzAgWiIgZmlsbD0iYmxhY2siLz4KICAgIAogICAgPCEtLSBMZWZ0IHNpZGUgbGVhdmVzIC0tPgogICAgPHBhdGggZD0iTTQ1LDcwIEwyNSw1MCBDMTAsMzUgMCw0MCA1LDUwIEMxMCw2MCAyNSw2NSA0NSw3MCBaIiBmaWxsPSJibGFjayIvPgogICAgPHBhdGggZD0iTTQ1LDcwIEwyMCw0MCBDNSwzMCAwLDQwIDEwLDUwIEMyMCw1NSAzNSw2NSA0NSw3MCBaIiBmaWxsPSJibGFjayIvPgogICAgCiAgICA8IS0tIFJpZ2h0IHNpZGUgbGVhdmVzIC0tPgogICAgPHBhdGggZD0iTTQ1LDcwIEw2NSw1MCBDODAsMzUgOTAsNDAgODUsNTAgQzgwLDYwIDY1LDY1IDQ1LDcwIFoiIGZpbGw9ImJsYWNrIi8+CiAgICA8cGF0aCBkPSJNNDUsNzAgTDcwLDQwIEM4NSwzMCA5MCw0MCA4MCw1MCBDNzAsNTUgNTUsNjUgNDUsNzAgWiIgZmlsbD0iYmxhY2siLz4KICAgIAogICAgPCEtLSBUb3AgbGVhZiAtLT4KICAgIDxwYXRoIGQ9Ik00NSw3MCBMNDUsMzAgQzQ1LDE1IDYwLDEwIDY1LDIwIEM3MCwzMCA2MCw1MCA0NSw3MCBaIiBmaWxsPSJibGFjayIvPgogIDwvZz4KICAKICA8IS0tIEV4Y2xhbWF0aW9uIG1hcmsgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgwLCAxNjApIj4KICAgIDxyZWN0IHg9Ii0xMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgwIiByeD0iNSIgcnk9IjUiIGZpbGw9ImJsYWNrIi8+CiAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iMTEwIiByPSIxMCIgZmlsbD0iYmxhY2siLz4KICA8L2c+CiAgCiAgPCEtLSBOTyBESVNUUklCVVRJT04gdGV4dCAtLT4KICA8dGV4dCB4PSIyMDAiIHk9IjM3MCIgZm9udC1mYW1pbHk9IkltcGFjdCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iYmxhY2siIGZvbnQtd2VpZ2h0PSJib2xkIiBzdHlsZT0ibGV0dGVyLXNwYWNpbmc6MnB4OyI+Tk8gRElTVFJJQlVUSU9OPC90ZXh0Pgo8L3N2Zz4=" alt="Verification Logo" width="180" height="180" class="img-fluid">
+            <!-- Logo (inline SVG for better compatibility) -->
+            <div class="text-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="180" height="180" style="max-width: 100%;">
+                    <!-- Warning Triangle -->
+                    <path d="M200,40 L360,320 L40,320 Z" fill="white" stroke="black" stroke-width="20"/>
+                    
+                    <!-- Cannabis Leaf -->
+                    <g transform="translate(130, 140) scale(1.5)">
+                        <!-- Main stem -->
+                        <path d="M45,70 L45,40 C45,20 30,10 20,15 C10,20 20,35 30,40 L45,70 Z" fill="black"/>
+                        
+                        <!-- Left side leaves -->
+                        <path d="M45,70 L25,50 C10,35 0,40 5,50 C10,60 25,65 45,70 Z" fill="black"/>
+                        <path d="M45,70 L20,40 C5,30 0,40 10,50 C20,55 35,65 45,70 Z" fill="black"/>
+                        
+                        <!-- Right side leaves -->
+                        <path d="M45,70 L65,50 C80,35 90,40 85,50 C80,60 65,65 45,70 Z" fill="black"/>
+                        <path d="M45,70 L70,40 C85,30 90,40 80,50 C70,55 55,65 45,70 Z" fill="black"/>
+                        
+                        <!-- Top leaf -->
+                        <path d="M45,70 L45,30 C45,15 60,10 65,20 C70,30 60,50 45,70 Z" fill="black"/>
+                    </g>
+                    
+                    <!-- Exclamation mark -->
+                    <g transform="translate(280, 160)">
+                        <rect x="-10" y="0" width="20" height="80" rx="5" ry="5" fill="black"/>
+                        <circle cx="0" cy="110" r="10" fill="black"/>
+                    </g>
+                    
+                    <!-- NO DISTRIBUTION text -->
+                    <text x="200" y="370" font-family="Arial, Impact, sans-serif" font-size="28" text-anchor="middle" fill="black" font-weight="bold" style="letter-spacing:1px;">NO DISTRIBUTION</text>
+                </svg>
             </div>
             <h2 class="text-center mb-4">Product Verification</h2>
             

@@ -110,8 +110,38 @@
         <div class="verification-container">
             <div class="verification-box bg-dark">
                 <!-- Logo -->
-                <div class="text-center mb-3">
-                    <img src="logo.svg" alt="Verification Logo" width="180" height="180" class="img-fluid">
+                <div class="text-center mb-4">
+                    <!-- Directly embedded SVG for better compatibility -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="180" height="180" style="max-width: 100%;">
+                        <!-- Warning Triangle -->
+                        <path d="M200,40 L360,320 L40,320 Z" fill="white" stroke="black" stroke-width="20"/>
+                        
+                        <!-- Cannabis Leaf -->
+                        <g transform="translate(130, 140) scale(1.5)">
+                            <!-- Main stem -->
+                            <path d="M45,70 L45,40 C45,20 30,10 20,15 C10,20 20,35 30,40 L45,70 Z" fill="black"/>
+                            
+                            <!-- Left side leaves -->
+                            <path d="M45,70 L25,50 C10,35 0,40 5,50 C10,60 25,65 45,70 Z" fill="black"/>
+                            <path d="M45,70 L20,40 C5,30 0,40 10,50 C20,55 35,65 45,70 Z" fill="black"/>
+                            
+                            <!-- Right side leaves -->
+                            <path d="M45,70 L65,50 C80,35 90,40 85,50 C80,60 65,65 45,70 Z" fill="black"/>
+                            <path d="M45,70 L70,40 C85,30 90,40 80,50 C70,55 55,65 45,70 Z" fill="black"/>
+                            
+                            <!-- Top leaf -->
+                            <path d="M45,70 L45,30 C45,15 60,10 65,20 C70,30 60,50 45,70 Z" fill="black"/>
+                        </g>
+                        
+                        <!-- Exclamation mark -->
+                        <g transform="translate(280, 160)">
+                            <rect x="-10" y="0" width="20" height="80" rx="5" ry="5" fill="black"/>
+                            <circle cx="0" cy="110" r="10" fill="black"/>
+                        </g>
+                        
+                        <!-- NO DISTRIBUTION text -->
+                        <text x="200" y="370" font-family="Arial, Impact, sans-serif" font-size="28" text-anchor="middle" fill="black" font-weight="bold" style="letter-spacing:1px;">NO DISTRIBUTION</text>
+                    </svg>
                 </div>
                 <h2 class="text-center mb-4">Product Verification</h2>
                 
