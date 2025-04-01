@@ -116,6 +116,14 @@
                     </button>
                 </div>
                 
+                <!-- Verification Counter -->
+                <div id="codeCounter" class="text-center mt-3 d-none">
+                    <small class="text-warning">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        This code has been verified <span id="verificationCount">0</span> times
+                    </small>
+                </div>
+                
                 <div id="authenticResult" class="result-box authentic hidden">
                     <i class="fas fa-check-circle me-2"></i> Authentic Product
                 </div>
@@ -140,9 +148,11 @@
             const verifyButton = document.getElementById('verifyButton');
             const authenticResult = document.getElementById('authenticResult');
             const fakeResult = document.getElementById('fakeResult');
+            const codeCounter = document.getElementById('codeCounter');
+            const verificationCount = document.getElementById('verificationCount');
             
             // Function to verify the product code
-            function verifyCode() {
+            async function verifyCode() {
                 // Get the entered code
                 const code = verificationCodeInput.value.trim();
                 
@@ -158,28 +168,62 @@
                 // Hide both result boxes first
                 authenticResult.classList.add('hidden');
                 fakeResult.classList.add('hidden');
+                codeCounter.classList.add('d-none');
                 
-                // Check if the code starts with "08552"
-                if (code.startsWith('08552')) {
-                    // Show the authentic result
-                    authenticResult.classList.remove('hidden');
-                    // Add pulse animation
-                    authenticResult.classList.add('pulse');
+                try {
+                    // Send verification request to API
+                    const response = await fetch('/api/verify-code', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ code: code })
+                    });
                     
-                    // Remove the pulse class after the animation completes
-                    setTimeout(() => {
-                        authenticResult.classList.remove('pulse');
-                    }, 1500);
-                } else {
-                    // Show the fake result
-                    fakeResult.classList.remove('hidden');
-                    // Add shake animation
-                    fakeResult.classList.add('shake');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
                     
-                    // Remove the shake class after the animation completes
-                    setTimeout(() => {
-                        fakeResult.classList.remove('shake');
-                    }, 500);
+                    const data = await response.json();
+                    
+                    // Update the verification counter
+                    verificationCount.textContent = data.count;
+                    codeCounter.classList.remove('d-none');
+                    
+                    // Display result based on authenticity
+                    if (data.authentic) {
+                        // Show the authentic result
+                        authenticResult.classList.remove('hidden');
+                        // Add pulse animation
+                        authenticResult.classList.add('pulse');
+                        
+                        // Remove the pulse class after the animation completes
+                        setTimeout(() => {
+                            authenticResult.classList.remove('pulse');
+                        }, 1500);
+                    } else {
+                        // Show the fake result
+                        fakeResult.classList.remove('hidden');
+                        // Add shake animation
+                        fakeResult.classList.add('shake');
+                        
+                        // Remove the shake class after the animation completes
+                        setTimeout(() => {
+                            fakeResult.classList.remove('shake');
+                        }, 500);
+                    }
+                    
+                    // Change counter text color if verification count is high (potential duplicate)
+                    if (data.count > 3) {
+                        codeCounter.querySelector('small').classList.remove('text-warning');
+                        codeCounter.querySelector('small').classList.add('text-danger');
+                    } else {
+                        codeCounter.querySelector('small').classList.remove('text-danger');
+                        codeCounter.querySelector('small').classList.add('text-warning');
+                    }
+                } catch (error) {
+                    console.error('Error verifying code:', error);
+                    alert('An error occurred while verifying your code. Please try again.');
                 }
             }
             
@@ -193,8 +237,11 @@
                 }
             });
             
-            // Remove invalid state when user starts typing and enforce max length
+            // Reset counter when input changes
             verificationCodeInput.addEventListener('input', function() {
+                // Hide counter when user starts typing a new code
+                codeCounter.classList.add('d-none');
+                
                 if (this.value.trim() !== '') {
                     this.classList.remove('is-invalid');
                 }
