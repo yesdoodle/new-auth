@@ -53,6 +53,10 @@
             animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
         }
         
+        .pulse {
+            animation: pulse 1.5s ease-in-out;
+        }
+        
         @keyframes shake {
             10%, 90% {
                 transform: translate3d(-1px, 0, 0);
@@ -68,6 +72,23 @@
             
             40%, 60% {
                 transform: translate3d(4px, 0, 0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(72, 199, 116, 0.7);
+            }
+            
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(72, 199, 116, 0);
+            }
+            
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(72, 199, 116, 0);
             }
         }
     </style>
@@ -140,6 +161,13 @@
                 if (code.startsWith('08552')) {
                     // Show the authentic result
                     authenticResult.classList.remove('hidden');
+                    // Add pulse animation
+                    authenticResult.classList.add('pulse');
+                    
+                    // Remove the pulse class after the animation completes
+                    setTimeout(() => {
+                        authenticResult.classList.remove('pulse');
+                    }, 1500);
                 } else {
                     // Show the fake result
                     fakeResult.classList.remove('hidden');
