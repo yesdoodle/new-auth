@@ -17,6 +17,10 @@ def reset_counter():
 def index():
     return send_from_directory('.', 'index.html')
 
+@app.route('/img/<path:filename>')
+def serve_image(filename):
+    return send_from_directory('img', filename)
+
 @app.route('/api/verify-code', methods=['POST'])
 def verify_code():
     """Track how many times a specific code has been verified"""
